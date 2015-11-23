@@ -5,7 +5,7 @@ import java.util.List;
  */
 public class Star {
     public Vector carent;
-    private Vector delta;
+    public Vector delta;
     public int m;
 
     public Star(Vector vector){
@@ -13,8 +13,11 @@ public class Star {
     }
 
     public void Calculate(List<Star> stars){
+        double force;
         for(Star star:stars){
-            if(star != this) {
+            if(star != this && star != null) {
+                force = 2/carent.length(star.carent);
+
                 //delta = delta.add(star.carent);
             }
         }

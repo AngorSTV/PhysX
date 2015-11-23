@@ -43,7 +43,9 @@ public class Main extends JFrame{
         Random rnd = new Random();
         for (int i=0; i<200; i++){
             Vector v = new Vector(rnd.nextDouble()*600, rnd.nextDouble()*600);
+            Vector speed = new Vector(rnd.nextDouble()- 0.5, rnd.nextDouble() - 0.5);
             Star star = new Star(v);
+            star.delta = speed;
             stars.add(star);
         }
     }

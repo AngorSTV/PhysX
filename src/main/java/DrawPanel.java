@@ -22,6 +22,9 @@ public class DrawPanel extends JPanel implements Runnable {
     @Override
     public void run() {
         while (true) {
+            for(Star star:stars){
+                star.Move();
+            }
             repaint();
             try {
                 Thread.sleep(5);
