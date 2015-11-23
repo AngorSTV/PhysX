@@ -16,16 +16,10 @@ public class Vector {
         this.y = y;
     }
 
-    public Vector (double x1, double y1, double x2, double y2){
-
-    }
-
     // сложение с другим вектором
-    public Vector add(Vector other){
-        Vector newVector = new Vector();
-        newVector.x = this.x + other.x;
-        newVector.y = this.y + other.y;
-        return newVector;
+    public void add(Vector other){
+        this.x = this.x + other.x;
+        this.y = this.y + other.y;
     }
 
     // растояние между двумя точками заданными векторами

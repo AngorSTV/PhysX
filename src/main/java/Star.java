@@ -21,6 +21,6 @@ public class Star {
     }
 
     public void Move(){
-    this.carent = carent.add(delta);
+    carent.add(delta);
     }
 }

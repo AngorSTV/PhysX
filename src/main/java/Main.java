@@ -1,35 +1,48 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Main {
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+public class Main extends JFrame{
 
     public static List<Star> stars = new ArrayList<>();
 
-    public static void main(String[] args) {
+    Main(String s) {
+        super(s);
+
         initStars();
+
+        DrawPanel panel = new DrawPanel(stars);
+        panel.setPreferredSize(new Dimension(600, 600));
+        add(panel);
+        pack();
+        setVisible(true);
+        this.setLocationRelativeTo(null);
+    }
+
+    public static void main(String[] args) {
+
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {}
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                createAndShow();
+                JFrame frame = new Main("Star Sim");
+                frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
             }
         });
     }
 
-    private static void createAndShow(){
-
-        JFrame frame = new JFrame("PhysX Stars");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 600);
-        frame.add(new MyPanel(stars));
-        frame.setVisible(true);
-    }
-
-    private static void initStars (){
+    private void initStars (){
         Random rnd = new Random();
-        for (int i=0; i<100; i++){
-            Vector v = new Vector(rnd.nextDouble()*500, rnd.nextDouble()*500);
+        for (int i=0; i<200; i++){
+            Vector v = new Vector(rnd.nextDouble()*600, rnd.nextDouble()*600);
             Star star = new Star(v);
             stars.add(star);
         }
