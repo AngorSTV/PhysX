@@ -41,12 +41,12 @@ public class Main extends JFrame{
 
     private void initStars (){
         Random rnd = new Random();
-        for (int i=0; i<200; i++){
-            Vector v = new Vector(rnd.nextDouble()*600, rnd.nextDouble()*600);
-            Vector speed = new Vector(rnd.nextDouble()- 0.5, rnd.nextDouble() - 0.5);
+        for (int i=0; i<50; i++){
+            Vector v = new Vector(rnd.nextDouble()*600-300, rnd.nextDouble()*600-300);
+            //Vector speed = new Vector(rnd.nextDouble()- 0.5, rnd.nextDouble() - 0.5);
             Star star = new Star(v);
-            star.delta = speed;
-            star.m = rnd.nextDouble();
+            //star.delta = speed;
+            star.m = rnd.nextDouble()*7;
             stars.add(star);
         }
     }

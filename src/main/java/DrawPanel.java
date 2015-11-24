@@ -42,12 +42,14 @@ public class DrawPanel extends JPanel implements Runnable {
 
         int ratio = 1;
 
-        int x, y;
+        int x, y, r;
 
         for (Star star : stars) {
             x = ratio * (int) star.carent.x;
             y = ratio * (int) star.carent.y;
-            g.drawLine(x, y, x, y);
+            r = ratio * (int) star.m;
+            //g.drawLine(x, y, x, y);
+            g.drawOval(x+300, y+300, r, r);
         }
         /*Graphics2D g2d = (Graphics2D) g;
 

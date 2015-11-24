@@ -20,7 +20,7 @@ public class Star {
             if(star != this && star != null) {
                 toForce = carent.sub(star.carent);
                 toForce.normalize();
-                force = G * (this.m*star.m)/Math.pow(carent.distance(star.carent),2);
+                force = G*1000000*(this.m*star.m)/Math.pow(carent.distance(star.carent),1.5);
                 toForce.mult(force);
 
                 delta.add(toForce);
@@ -30,5 +30,11 @@ public class Star {
 
     public void Move(){
     carent.add(delta);
+        if (Math.abs(carent.x) > 310){
+            delta.x = -delta.x*0.9;
+        }
+        if (Math.abs(carent.y) > 310){
+            delta.y = -delta.y*0.9;
+        }
     }
 }
