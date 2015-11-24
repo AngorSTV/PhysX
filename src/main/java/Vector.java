@@ -22,8 +22,28 @@ public class Vector {
         this.y = this.y + other.y;
     }
 
+    // вычитание текущего вектора из другого
+    public Vector sub(Vector other){
+        Vector result = new Vector();
+        result.x = other.x - this.x;
+        result.y = other.y - this.y;
+        return result;
+    }
+
     // растояние между двумя точками заданными векторами
-    public double length (Vector other){
+    public double distance(Vector other){
         return Math.sqrt(Math.pow((this.x - other.x), 2) + Math.pow((this.y - other.y),2));
+    }
+
+    // длина вектора
+    public double getLength (){
+        return Math.sqrt(Math.pow((this.x), 2) + Math.pow((this.y),2));
+    }
+
+    // нормализация вектора
+    public void normalize (){
+        double length = this.getLength();
+        this.x = this.x/length;
+        this.y = this.y/length;
     }
 }

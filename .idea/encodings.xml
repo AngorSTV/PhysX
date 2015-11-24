@@ -3,7 +3,6 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/Main.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/MyPanel.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/Star.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/Vector.java" charset="UTF-8" />
   </component>

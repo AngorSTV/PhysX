@@ -14,9 +14,11 @@ public class Star {
 
     public void Calculate(List<Star> stars){
         double force;
+        Vector toForce = new Vector();
         for(Star star:stars){
             if(star != this && star != null) {
-                force = 2/carent.length(star.carent);
+                toForce = carent.sub(star.carent);
+                force = 2/carent.distance(star.carent);
 
                 //delta = delta.add(star.carent);
             }
