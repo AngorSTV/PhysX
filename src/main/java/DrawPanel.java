@@ -23,11 +23,12 @@ public class DrawPanel extends JPanel implements Runnable {
     public void run() {
         while (true) {
             for(Star star:stars){
+                star.Calculate(stars);
                 star.Move();
             }
             repaint();
             try {
-                Thread.sleep(5);
+                Thread.sleep(50);
             } catch (InterruptedException ex) {}
         }
     }

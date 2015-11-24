@@ -46,4 +46,9 @@ public class Vector {
         this.x = this.x/length;
         this.y = this.y/length;
     }
+
+    public void mult (double factor){
+        this.x = this.x*factor;
+        this.y = this.y*factor;
+    }
 }

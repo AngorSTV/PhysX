@@ -46,6 +46,7 @@ public class Main extends JFrame{
             Vector speed = new Vector(rnd.nextDouble()- 0.5, rnd.nextDouble() - 0.5);
             Star star = new Star(v);
             star.delta = speed;
+            star.m = rnd.nextDouble();
             stars.add(star);
         }
     }

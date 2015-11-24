@@ -6,7 +6,8 @@ import java.util.List;
 public class Star {
     public Vector carent;
     public Vector delta;
-    public int m;
+    public double m;
+    private static double G = 6.673848080e-11;
 
     public Star(Vector vector){
         this.carent = vector;
@@ -18,9 +19,11 @@ public class Star {
         for(Star star:stars){
             if(star != this && star != null) {
                 toForce = carent.sub(star.carent);
-                force = 2/carent.distance(star.carent);
+                toForce.normalize();
+                force = G * (this.m*star.m)/Math.pow(carent.distance(star.carent),2);
+                toForce.mult(force);
 
-                //delta = delta.add(star.carent);
+                delta.add(toForce);
             }
         }
     }
