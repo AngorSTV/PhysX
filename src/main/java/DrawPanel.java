@@ -34,7 +34,7 @@ public class DrawPanel extends JPanel implements Runnable {
             }
             repaint();
             try {
-                Thread.sleep(50);
+                Thread.sleep(5);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -48,7 +48,7 @@ public class DrawPanel extends JPanel implements Runnable {
         int width = getWidth();
         int height = getHeight();
 
-        int ratio = 1;
+        double ratio = (double)width/(Star.sizeUniverse*2);
 
         int x, y, r;
 
@@ -60,15 +60,17 @@ public class DrawPanel extends JPanel implements Runnable {
         }
 
         for (Star star : stars) {
-            x = ratio * (int) star.carent.x;
-            y = ratio * (int) star.carent.y;
-            r = ratio * (int) (star.m * 0.1);
+            x = (int)(ratio * star.carent.x);
+            y = (int)(ratio * star.carent.y);
+            r = (int)(ratio * Math.sqrt(star.m)*0.1);
 
-            g.drawOval(x + 300, y + 300, r, r);
-            g.fillOval(x + 300, y + 300, r, r);
+            g.drawOval(x + width/2, y + height/2, r, r);
+            g.fillOval(x + width/2, y + height/2, r, r);
         }
         g.drawString("Total stars:"+stars.size(), 1, 15);
         g.drawString("Total mass: "+ String.valueOf((int)totalMass), 1, 30);
         g.drawString("Total frame:" + String.valueOf((int)totalFrame),1,45);
+        g.drawString("Ratio: " + String.valueOf(ratio),1, 60);
+        g.drawString("Width: " + String.valueOf(width),1, 75);
     }
 }

@@ -10,8 +10,8 @@ import java.awt.Graphics2D;
 
 public class Main extends JFrame{
 
-    private static final int starsQuantity = 300;
-    private static final int massBand = 15;
+    private static final int starsQuantity = 500;
+    private static final int massBand = 500;
 
     public static List<Star> stars = new ArrayList<>();
 
@@ -44,9 +44,10 @@ public class Main extends JFrame{
 
     private void initStars (){
         Random rnd = new Random();
+        int size = Star.sizeUniverse*2;
         for (int i=0; i<starsQuantity; i++){
-            Vector v = new Vector(rnd.nextDouble()*600-300, rnd.nextDouble()*600-300);
-            Vector speed = new Vector(rnd.nextDouble()- 0.5, rnd.nextDouble() - 0.5);
+            Vector v = new Vector(rnd.nextDouble()*size-size/2, rnd.nextDouble()*size-size/2);
+            Vector speed = new Vector(rnd.nextDouble()*10- 5, rnd.nextDouble()*10 - 5);
             Star star = new Star(v);
             star.delta = speed;
             star.m = rnd.nextDouble()*massBand + 1;
