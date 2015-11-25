@@ -7,7 +7,8 @@ public class Star {
     public Vector carent;
     public Vector delta;
     public double m;
-    private static double G = 6.673848080e-11;
+    private static final double G = 0.8; //гравитационная постоянная с учётом масштаба симуляции
+    private static final double SH = 1; // радиус сферы Шварцшильда
 
     public Star(Vector vector){
         this.carent = vector;
@@ -18,9 +19,16 @@ public class Star {
         Vector toForce = new Vector();
         for(Star star:stars){
             if(star != this && star != null) {
+                // слияние звёзд
+                if (carent.distance(star.carent)< SH){
+                    this.m = this.m + star.m;
+                    star = null;
+                    break;
+                }
+
                 toForce = carent.sub(star.carent);
                 toForce.normalize();
-                force = G*1000000*(this.m*star.m)/Math.pow(carent.distance(star.carent),1.5);
+                force = G *(this.m*star.m)/Math.pow(carent.distance(star.carent),1.4)/this.m;
                 toForce.mult(force);
 
                 delta.add(toForce);
@@ -30,11 +38,11 @@ public class Star {
 
     public void Move(){
     carent.add(delta);
-        if (Math.abs(carent.x) > 310){
-            delta.x = -delta.x*0.9;
+        if (Math.abs(carent.x) > 300){
+            delta.x = -delta.x*0.99;
         }
-        if (Math.abs(carent.y) > 310){
-            delta.y = -delta.y*0.9;
+        if (Math.abs(carent.y) > 300){
+            delta.y = -delta.y*0.99;
         }
     }
 }

@@ -29,7 +29,9 @@ public class DrawPanel extends JPanel implements Runnable {
             repaint();
             try {
                 Thread.sleep(50);
-            } catch (InterruptedException ex) {}
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -48,19 +50,8 @@ public class DrawPanel extends JPanel implements Runnable {
             x = ratio * (int) star.carent.x;
             y = ratio * (int) star.carent.y;
             r = ratio * (int) star.m;
-            //g.drawLine(x, y, x, y);
+
             g.drawOval(x+300, y+300, r, r);
         }
-        /*Graphics2D g2d = (Graphics2D) g;
-
-        long tm = System.nanoTime() - t;
-        double angle = tm / 300000000.0;
-
-        double sn = Math.sin(Math.sin(angle) * 0.5);
-        double cs = Math.cos(Math.sin(angle) * 0.5);
-        int x = (int) (250 * sn + 150);
-        int y = (int) (250 * cs);
-        g2d.drawLine(150, 0, x, y);
-        g2d.drawOval(x - 20, y - 20, 40, 40);*/
     }
 }
