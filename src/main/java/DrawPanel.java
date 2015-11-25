@@ -9,6 +9,7 @@ import java.util.List;
 public class DrawPanel extends JPanel implements Runnable {
 
     private long t = System.nanoTime();
+    private static double totalFrame =0;
     public java.util.List<Star> stars = new ArrayList<>();
 
     public DrawPanel(List<Star> stars) {
@@ -51,6 +52,8 @@ public class DrawPanel extends JPanel implements Runnable {
 
         int x, y, r;
 
+        totalFrame++;
+
         double totalMass =0;
         for(Star star:stars){
             totalMass = totalMass + star.m;
@@ -64,7 +67,8 @@ public class DrawPanel extends JPanel implements Runnable {
             g.drawOval(x + 300, y + 300, r, r);
             g.fillOval(x + 300, y + 300, r, r);
         }
-        g.drawString("Total stars:"+stars.size(), 1, 20);
-        g.drawString("Total mass: "+ String.valueOf(totalMass), 1, 40);
+        g.drawString("Total stars:"+stars.size(), 1, 15);
+        g.drawString("Total mass: "+ String.valueOf((int)totalMass), 1, 30);
+        g.drawString("Total frame:" + String.valueOf((int)totalFrame),1,45);
     }
 }

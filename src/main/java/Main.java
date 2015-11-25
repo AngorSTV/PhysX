@@ -10,7 +10,7 @@ import java.awt.Graphics2D;
 
 public class Main extends JFrame{
 
-    private static final int starsQuantity = 30;
+    private static final int starsQuantity = 300;
     private static final int massBand = 15;
 
     public static List<Star> stars = new ArrayList<>();
@@ -49,7 +49,7 @@ public class Main extends JFrame{
             Vector speed = new Vector(rnd.nextDouble()- 0.5, rnd.nextDouble() - 0.5);
             Star star = new Star(v);
             star.delta = speed;
-            star.m = rnd.nextDouble()*massBand;
+            star.m = rnd.nextDouble()*massBand + 1;
             stars.add(star);
         }
     }

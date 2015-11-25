@@ -11,8 +11,10 @@ public class Star {
 
     public boolean isAlive = true;
 
-    private static final double G = 0.5; //гравитационная постоянная с учётом масштаба симуляции
-    private static final double SH = 1; // радиус сферы Шварцшильда
+    private static final double G = 0.1; //гравитационная постоянная с учётом масштаба симуляции
+    private static final double SH = 0.1; // радиус сферы Шварцшильда
+    private static final double C = 100; // скорость света
+    private static final int size = 500; // размер вселенной
 
     public Star(Vector vector){
         this.carent = vector;
@@ -22,24 +24,10 @@ public class Star {
         double force;
         Vector toForce = new Vector();
 
-        /*Iterator<Star> iStar = stars.iterator();
-        while (iStar.hasNext()){
-            if (carent.distance(iStar.next().carent)< SH){
-                this.m = this.m + iStar.next().m;
-                iStar.remove();
-                break;
-            }
-            toForce = carent.sub(iStar.next().carent);
-            toForce.normalize();
-            force = G *(this.m*iStar.next().m)/Math.pow(carent.distance(iStar.next().carent),1.4)/this.m;
-            toForce.mult(force);
-
-            delta.add(toForce);
-        }*/
         for(Star star:stars){
             if(star != this && star.isAlive) {
                 // слияние звёзд
-                if (carent.distance(star.carent)< SH){
+                if (carent.distance(star.carent)< SH*Math.sqrt(m)){
                     this.m = this.m + star.m;
                     star.isAlive = false;
                     break;
@@ -47,7 +35,7 @@ public class Star {
 
                 toForce = carent.sub(star.carent);
                 toForce.normalize();
-                force = G *(this.m*star.m)/Math.pow(carent.distance(star.carent),1.4)/(this.m*2);
+                force = G *(this.m*star.m)/Math.pow(carent.distance(star.carent),1.25)/(this.m*2);
                 toForce.mult(force);
 
                 delta.add(toForce);
@@ -57,14 +45,11 @@ public class Star {
 
     public void Move(){
     carent.add(delta);
-        if (Math.abs(carent.x) > 300){
-            delta.x = -delta.x*0.9;
-            carent.x = 299;
-        }
-        if (Math.abs(carent.y) > 300){
-            delta.y = -delta.y*0.9;
-            carent.y = 299;
-        }
-        if (Math.abs(carent.x) > 1000 && Math.abs(carent.y) > 1000) this.isAlive = false;
+        if (carent.x > size) carent.x = -size;
+        if (carent.x < -size) carent.x = size;
+        if (carent.y > size) carent.y = -size;
+        if (carent.y < -size) carent.y = size;
+        if (delta.x > C) delta.x = C;
+        if (delta.y > C) delta.y = C;
     }
 }
