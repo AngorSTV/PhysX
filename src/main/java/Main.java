@@ -10,7 +10,7 @@ import java.awt.Graphics2D;
 
 public class Main extends JFrame{
 
-    private static final int starsQuantity = 2;
+    private static final int starsQuantity = 30;
     private static final int massBand = 15;
 
     public static List<Star> stars = new ArrayList<>();
