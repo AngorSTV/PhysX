@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
 public class Main extends JFrame{
 
-    private static final int starsQuantity = 500;
+    private static final int starsQuantity = 1000;
     private static final int massBand = 500;
 
-    public static List<Star> stars = new ArrayList<>();
+    private List<Star> stars = new ArrayList<>();
 
     Main(String s) {
         super(s);
@@ -46,11 +42,11 @@ public class Main extends JFrame{
         Random rnd = new Random();
         int size = Star.sizeUniverse*2;
         for (int i=0; i<starsQuantity; i++){
-            Vector v = new Vector(rnd.nextDouble()*size-size/2, rnd.nextDouble()*size-size/2);
-            Vector speed = new Vector(rnd.nextDouble()*10- 5, rnd.nextDouble()*10 - 5);
+            Vector2D v = new Vector2D(rnd.nextDouble()*size/2-size/4, rnd.nextDouble()*size/2-size/4);
+            Vector2D speed = new Vector2D(rnd.nextDouble()*10- 5, rnd.nextDouble()*10 - 5);
             Star star = new Star(v);
             star.delta = speed;
-            star.m = rnd.nextDouble()*massBand + 1;
+            star.m = rnd.nextDouble()*massBand + 100;
             stars.add(star);
         }
     }
