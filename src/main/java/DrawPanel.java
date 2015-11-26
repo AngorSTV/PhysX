@@ -8,7 +8,8 @@ import java.util.List;
  */
 public class DrawPanel extends JPanel implements Runnable {
 
-    private long t;// = System.nanoTime();
+    private static final int maxThreads = 90;
+    private long t;
     private static double totalFrame = 0;
     private List<Star> stars;
 
@@ -22,7 +23,7 @@ public class DrawPanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        Process th[] = new Process[8];
+        Process th[] = new Process[maxThreads];
         Star star;
         while (true) {
             long t1 = System.nanoTime();
@@ -33,13 +34,13 @@ public class DrawPanel extends JPanel implements Runnable {
 
             // много поточная обработка звёзд
             iStar = stars.iterator();
-            for (int i=0;i<4;i++){
+            for (int i=0;i<maxThreads;i++){
                 star = iStar.next();
                 th[i] = new Process(stars,star);
                 th[i].start();
             }
 
-            for(int k=0;k<4;k++){
+            for(int k=0;k<maxThreads;k++){
                 try {
                     th[k].join();
                 } catch (InterruptedException e) {
