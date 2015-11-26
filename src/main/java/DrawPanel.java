@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
-import java.util.List;
+import java.util.Iterator;
 
 /**
  * Created by Angor on 23.11.2015.
@@ -11,11 +10,10 @@ public class DrawPanel extends JPanel implements Runnable {
     private static final int maxThreads = 90;
     private long t;
     private static double totalFrame = 0;
-    private List<Star> stars;
+    //private List<Star> stars;
 
-    public DrawPanel(List<Star> stars) {
+    public DrawPanel() {
         super();
-        this.stars = stars;
         setBackground(new Color(0));
         setForeground(new Color(255, 255, 255));
         new Thread(this).start();
@@ -23,16 +21,16 @@ public class DrawPanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        Process th[] = new Process[maxThreads];
-        Star star;
+        //Process th[] = new Process[maxThreads];
+        //Star star;
         while (true) {
             long t1 = System.nanoTime();
-            Iterator<Star> iStar = stars.iterator();
+            Iterator<Star> iStar = Universe.stars.iterator();
             while (iStar.hasNext()) {
                 if (!iStar.next().isAlive) iStar.remove();
             }
 
-            // много поточная обработка звёзд
+            /*/ много поточная обработка звёзд
             iStar = stars.iterator();
             for (int i=0;i<maxThreads;i++){
                 star = iStar.next();
@@ -54,11 +52,24 @@ public class DrawPanel extends JPanel implements Runnable {
                 th[k].start();
 
             }
-            // ------------------------
+            */// ------------------------
 
-            for (Star star2 : stars) {
-                //star.Calculate(stars);
-                star2.Move();
+            for (Star star : Universe.stars) {
+                /*try {
+                    Thread th = new Thread(star);
+                    th.start();
+                    th.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
+                star.run();
+                star.Move();
+            }
+
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             repaint();
             t = System.nanoTime() - t1;
@@ -72,21 +83,21 @@ public class DrawPanel extends JPanel implements Runnable {
         int width = getWidth();
         int height = getHeight();
 
-        double ratio = (double) width / (Star.sizeUniverse * 2);
+        double ratio = (double) width / (Universe.size * 2);
 
         int x, y, r;
 
         totalFrame++;
 
         double totalMass = 0;
-        for (Star star : stars) {
+        for (Star star : Universe.stars) {
             totalMass = totalMass + star.m;
         }
         /*synchronized (stars) {
             Iterator<Star> iStar = stars.iterator();
             while (iStar.hasNext()) {
-                x = (int) (ratio * iStar.next().carent.x);
-                y = (int) (ratio * iStar.next().carent.y);
+                x = (int) (ratio * iStar.next().current.x);
+                y = (int) (ratio * iStar.next().current.y);
                 r = (int) (ratio * Math.sqrt(iStar.next().m));
 
                 g.drawOval(x + width / 2, y + height / 2, r, r);
@@ -94,9 +105,9 @@ public class DrawPanel extends JPanel implements Runnable {
             }
         }*/
 
-        for (Star star : stars) {
-            x = (int) (ratio * star.carent.x);
-            y = (int) (ratio * star.carent.y);
+        for (Star star : Universe.stars) {
+            x = (int) (ratio * star.current.x);
+            y = (int) (ratio * star.current.y);
             r = (int) (ratio * Math.sqrt(star.m));
 
             g.drawOval(x + width / 2, y + height / 2, r, r);
@@ -106,10 +117,10 @@ public class DrawPanel extends JPanel implements Runnable {
         double fps = t;
         fps = fps/1000000000;
         fps = 1/fps;
-        g.drawString("Total stars:" + stars.size(), 1, 15);
+        g.drawString("Total stars:" + Universe.stars.size(), 1, 15);
         g.drawString("Total mass: " + String.valueOf((int) totalMass), 1, 30);
         g.drawString("Total frame:" + String.valueOf((int) totalFrame), 1, 45);
-        g.drawString("FPS: " + String.valueOf(fps), 1, 60);
+        g.drawString("FPS: " + String.valueOf((int)fps), 1, 60);
         g.drawString("Width: " + String.valueOf(width), 1, 75);
 
     }

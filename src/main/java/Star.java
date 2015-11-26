@@ -1,54 +1,47 @@
-import java.util.List;
-
 /**
  * Created by Angor on 22.11.2015.
  */
-public class Star {
-    public Vector2D carent;
+public class Star  implements Runnable{
+    public Vector2D current;
     public Vector2D delta;
     public double m;
 
     public boolean isAlive = true;
 
-    private static final double G = 0.7; //гравитационная постоянная с учётом масштаба симуляции
-    private static final double SH = 0.1; // радиус сферы Шварцшильда
-    private static final double C = 1000; // скорость света
-    public static final int sizeUniverse = 50000; // размер вселенной
-
-    public Star(Vector2D vector2D){
-        carent = vector2D;
+    public Star(Vector2D vector){
+        current = vector;
     }
 
-    public void Calculate(List<Star> stars){
-        double force;
-        Vector2D toForce = new Vector2D();
+    public void run(){
+        double force, r;
+        Vector2D forceVector;
 
-        for(Star star:stars){
+        for(Star star:Universe.stars){
             if(star != this && star.isAlive) {
+                r = current.distance(star.current);
                 // слияние звёзд
-                if (carent.distance(star.carent)< SH*Math.sqrt(m)){
-                    this.m = this.m + star.m;
+                if (r < Universe.SH*Math.sqrt(m)){
+                    m = m + star.m;
                     star.isAlive = false;
                     break;
                 }
 
-                toForce = carent.sub(star.carent);
-                toForce.normalize();
-                force = G *(this.m*star.m)/Math.pow(carent.distance(star.carent),1.4)/(this.m*2);
-                toForce.mult(force);
-
-                delta.add(toForce);
+                forceVector = current.sub(star.current);
+                forceVector.normalize();
+                force = Universe.gravitation(m, star.m, r)/2*m;
+                forceVector.mult(force);
+                delta.add(forceVector);
             }
         }
     }
 
     public void Move(){
-    carent.add(delta);
-        if (carent.x > sizeUniverse) carent.x = -sizeUniverse;
-        if (carent.x < -sizeUniverse) carent.x = sizeUniverse;
-        if (carent.y > sizeUniverse) carent.y = -sizeUniverse;
-        if (carent.y < -sizeUniverse) carent.y = sizeUniverse;
-        if (delta.x > C) delta.x = C;
-        if (delta.y > C) delta.y = C;
+    current.add(delta);
+        if (current.x > Universe.size) current.x = -Universe.size;
+        if (current.x < -Universe.size) current.x = Universe.size;
+        if (current.y > Universe.size) current.y = -Universe.size;
+        if (current.y < -Universe.size) current.y = Universe.size;
+        if (delta.x > Universe.C) delta.x = Universe.C;
+        if (delta.y > Universe.C) delta.y = Universe.C;
     }
 }
