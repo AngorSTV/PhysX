@@ -1,7 +1,7 @@
 /**
  * Created by Angor on 22.11.2015.
  */
-public class Star  implements Runnable{
+public class Star {
     public Vector2D current;
     public Vector2D delta;
     public double m;
@@ -37,10 +37,29 @@ public class Star  implements Runnable{
 
     public void Move(){
     current.add(delta);
-        if (current.x > Universe.size) current.x = -Universe.size;
-        if (current.x < -Universe.size) current.x = Universe.size;
-        if (current.y > Universe.size) current.y = -Universe.size;
-        if (current.y < -Universe.size) current.y = Universe.size;
+        /*if (current.x > Universe.size) {
+            current.x = -Universe.size;
+            delta.x = delta.x * 0.9;
+        }
+        if (current.x < -Universe.size) {
+            current.x = Universe.size;
+            delta.x = delta.x * 0.9;
+        }
+        if (current.y > Universe.size) {
+            current.y = -Universe.size;
+            delta.y = delta.y * 0.9;
+        }
+        if (current.y < -Universe.size) {
+            current.y = Universe.size;
+            delta.y = delta.y * 0.9;
+        }*/
+        if (current.getLength() > Universe.size*2) {
+            //this.isAlive = false;
+            current.x = 0;
+            current.y = 0;
+            delta.x = 0;
+            delta.y =0;
+        }
         if (delta.x > Universe.C) delta.x = Universe.C;
         if (delta.y > Universe.C) delta.y = Universe.C;
     }
