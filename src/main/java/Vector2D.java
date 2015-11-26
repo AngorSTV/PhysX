@@ -3,8 +3,8 @@
  * можно использовать как класический вектор, так и как просто указатель координат
  */
 public class Vector2D {
-    public volatile double x;
-    public volatile double y;
+    public double x;
+    public double y;
 
     public Vector2D(){
         this.x = 0;

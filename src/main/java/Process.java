@@ -15,6 +15,6 @@ public class Process extends Thread{
 
     public void run() {
         star.Calculate(stars);
-        star.Move();
+        //star.Move();
     }
 }
