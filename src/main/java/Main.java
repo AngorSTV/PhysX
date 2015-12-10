@@ -11,7 +11,7 @@ public class Main extends JFrame{
     Main(String s) {
         super(s);
 
-        //initStars();
+        initStars();
         //initSolarSystem();
         initAlfaSystem();
 

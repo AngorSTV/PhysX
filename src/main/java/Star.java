@@ -51,9 +51,9 @@ public class Star {
     public void Move() {
         Random rnd = new Random();
         int size = Universe.size * 2;
-        //if (this.m < 5000) {
+        if (this.m < 5000) {
             current.add(delta);
-        //}
+        }
         /*if (current.x > Universe.size) {
             current.x = -Universe.size;
             delta.x = delta.x * 0.9;
