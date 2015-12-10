@@ -110,8 +110,8 @@ public class DrawPanel extends JPanel implements Runnable {
             y = (int) (ratio * star.current.y);
             r = (int) (ratio * Math.sqrt(star.m));
 
-            g.drawOval(x + width / 2, y + height / 2, r, r);
-            g.fillOval(x + width / 2, y + height / 2, r, r);
+            g.drawOval((x + width / 2)-r/2, (y + height / 2)-r/2, r, r);
+            g.fillOval((x + width / 2)-r/2, (y + height / 2)-r/2, r, r);
         }
 
         double fps = t;

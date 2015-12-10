@@ -20,15 +20,15 @@ public class Star {
             if(star != this && star.isAlive) {
                 r = current.distance(star.current);
                 // слияние звёзд
-                if (r < Universe.SH*Math.sqrt(m)){
+                /*if (r < Universe.SH*Math.sqrt(m)){
                     m = m + star.m;
                     star.isAlive = false;
                     break;
-                }
+                }*/
 
                 forceVector = current.sub(star.current);
                 forceVector.normalize();
-                force = Universe.gravitation(m, star.m, r)/2*m;
+                force = Universe.gravitation(m, star.m, r);
                 forceVector.mult(force);
                 delta.add(forceVector);
             }
@@ -53,14 +53,14 @@ public class Star {
             current.y = Universe.size;
             delta.y = delta.y * 0.9;
         }*/
-        if (current.getLength() > Universe.size*2) {
+        /*if (current.getLength() > Universe.size*2) {
             //this.isAlive = false;
             current.x = 0;
             current.y = 0;
             delta.x = 0;
             delta.y =0;
-        }
-        if (delta.x > Universe.C) delta.x = Universe.C;
-        if (delta.y > Universe.C) delta.y = Universe.C;
+        }*/
+        /*if (delta.x > Universe.C) delta.x = Universe.C;
+        if (delta.y > Universe.C) delta.y = Universe.C;*/
     }
 }
