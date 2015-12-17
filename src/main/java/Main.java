@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Main extends JFrame{
 
-    private static final int starsQuantity = 300;
+    private static final int starsQuantity = 3000;
     private static final int massBand = 30;
 
 
@@ -13,7 +13,8 @@ public class Main extends JFrame{
 
         initStars();
         //initSolarSystem();
-        initAlfaSystem();
+        //initAlfaSystem();
+        //initBlackHoleSun();
 
         DrawPanel panel = new DrawPanel();
         panel.setPreferredSize(new Dimension(600, 600));
@@ -138,7 +139,16 @@ public class Main extends JFrame{
         Vector2D speed = new Vector2D(0, 0);
         Star star = new Star(point);
         star.delta = speed;
-        star.m = 5000;
+        star.m = 30000;
+        Universe.stars.add(star);
+    }
+
+    private void initBlackHoleSun (){
+        Vector2D point = new Vector2D(300,0);
+        Vector2D speed = new Vector2D(0, 0.3);
+        Star star = new Star(point);
+        star.delta = speed;
+        star.m = 3000;
         Universe.stars.add(star);
     }
 
