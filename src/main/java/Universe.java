@@ -11,7 +11,7 @@ public class Universe {
     public static final double C = 500; // скорость света
     public static final int size = 1000; // размер вселенной
 
-    public static List<Star> stars = new LinkedList<>();
+    //public static List<Star> stars = new LinkedList<>();
 
     public static double gravitation(double m1, double m2, double r) {
         return G * m2/Math.pow(r, 2);
