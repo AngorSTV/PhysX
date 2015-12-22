@@ -9,7 +9,7 @@ public class Star implements Runnable{
     public Vector2D delta;
     public double m;
 
-    public boolean isAlive = true;
+    public  volatile boolean isAlive = true;
     private List<Star> stars;
 
     public Star(Vector2D vector, List <Star> stars) {
@@ -20,36 +20,37 @@ public class Star implements Runnable{
     public void run() {
         double force, r;
         Vector2D forceVector;
-        synchronized (this) {
+        //synchronized (this) {
             for (Star star : stars) {
                 if (star != this && star.isAlive) {
                     r = current.distance(star.current);
-                    // слияние звёзд
+                    // поглощение другой звёзды
                     if (r < Universe.SH * Math.sqrt(m)) {
-                        if (m > star.m) {
-                            m = m + star.m;
-                            star.delta.mult(star.m / m);
-                            this.delta.add(star.delta);
-                            star.isAlive = false;
-                            break;
-                        } else {
-                            star.m = m + star.m;
-                            delta.mult(m / star.m);
-                            star.delta.add(delta);
-                            this.isAlive = false;
-                            break;
+                        synchronized (star){
+                            if (m >= star.m) {
+                                m = m + star.m;
+                                star.delta.mult(star.m / m);
+                                this.delta.add(star.delta);
+                                star.isAlive = false;
+                                //break;
+                            } /*else {
+                                star.m = m + star.m;
+                                delta.mult(m / star.m);
+                                star.delta.add(delta);
+                                this.isAlive = false;
+                                break;
+                            }*/
                         }
-
                     }
 
                     forceVector = current.sub(star.current);
                     forceVector.normalize();
-                    force = Universe.gravitation(m, star.m, r);
+                    force = Universe.gravitation(star.m, r);
                     forceVector.mult(force);
                     delta.add(forceVector);
                 }
             }
-        }
+        //}
     }
 
     public void Move() {
