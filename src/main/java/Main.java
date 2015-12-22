@@ -13,8 +13,8 @@ public class Main extends JFrame{
          List<Star> stars = new LinkedList<>();
 
         //initStars(stars);
-        initSolarSystem(stars);
-        //initAlfaSystem();
+        //initSolarSystem(stars);
+        initAlfaSystem(stars);
         //initBlackHoleSun();
 
         DrawPanel panel = new DrawPanel(stars);

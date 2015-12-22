@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class DrawPanel extends JPanel implements Runnable {
 
-    private static final int maxThreads = 100;
+    private static final int maxThreads = 20;
     private long t;
     private double fps;
     private double totalMass = 0;
@@ -74,7 +74,7 @@ public class DrawPanel extends JPanel implements Runnable {
         int width = getWidth();
         int height = getHeight();
 
-        double ratio = (double) width / (Universe.size * 2);
+        double ratio = (double) height / (Universe.size * 2);
 
         int x, y, r;
 
@@ -90,9 +90,10 @@ public class DrawPanel extends JPanel implements Runnable {
             y = (int) (ratio * star.current.y);
             r = (int) (ratio * Math.sqrt(star.m) * 0.5);
             if (star.m < 5001) {
-                g.drawOval((x + width / 2) - r / 2, (y + height / 2) - r / 2, r, r);
+                //g.drawOval((x + width / 2) - r / 2, (y + height / 2) - r / 2, r, r);
                 g.fillOval((x + width / 2) - r / 2, (y + height / 2) - r / 2, r, r);
             }
+            g.drawOval((x + width / 2) - r / 2, (y + height / 2) - r / 2, r, r);
         }
 
         g.drawString("Total stars:" + stars.size(), 1, 15);

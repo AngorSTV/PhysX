@@ -47,6 +47,7 @@ public class Vector2D {
         this.y = this.y/length;
     }
 
+    // умножение вектора на число
     public void mult (double factor){
         this.x = this.x*factor;
         this.y = this.y*factor;

@@ -29,7 +29,7 @@ public class Star implements Runnable{
                         synchronized (star){
                             if (m >= star.m) {
                                 m = m + star.m;
-                                star.delta.mult(star.m / m);
+                                star.delta.mult(star.m / (2*m));
                                 this.delta.add(star.delta);
                                 star.isAlive = false;
                                 //break;
@@ -56,9 +56,9 @@ public class Star implements Runnable{
     public void Move() {
         Random rnd = new Random();
         int size = Universe.size * 2;
-        if (this.m < 5000) {
+        //if (this.m < 5000) {
             current.add(delta);
-        }
+        //}
         /*if (current.x > Universe.size) {
             current.x = -Universe.size;
             delta.x = delta.x * 0.9;
