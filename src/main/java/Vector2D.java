@@ -16,6 +16,11 @@ public class Vector2D {
         this.y = y;
     }
 
+    public Vector2D (Vector2D other){
+        this.x = other.x;
+        this.y = other.y;
+    }
+
     // сложение с другим вектором
     public void add(Vector2D other){
         this.x = this.x + other.x;
@@ -65,11 +70,11 @@ public class Vector2D {
     public void ortogonale (boolean direct) {
         double newX = x;
         if (direct){
-            x = y;
-            y = -newX;
-        }else{
             x = -y;
             y = newX;
+        }else{
+            x = y;
+            y = -newX;
         }
     }
 }

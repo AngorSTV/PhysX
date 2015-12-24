@@ -37,9 +37,9 @@ public class DrawPanel extends JPanel implements Runnable {
     @Override
     public void run() {
         long t1;
-        int count =0;
+
         while (true) {
-            count++;
+
             t1 = System.currentTimeMillis();
 
             //Чистка масива от мёртвых объектов
@@ -139,7 +139,6 @@ public class DrawPanel extends JPanel implements Runnable {
 
     private void multiTwo() {
         int band = stars.size() / maxThreads;
-        //int tail = stars.size() - band * maxThreads;
 
         for (int i = 0; i < maxThreads; i++) {
             Domen domen = new Domen(stars.subList(i * band, i * band + band));

@@ -75,22 +75,22 @@ public class Star implements Runnable{
             current.y = Universe.size;
             delta.y = delta.y * 0.9;
         }*/
-        if (current.getLength() > Universe.size * 2) {
-            //this.isAlive = false;
-            this.current.x = rnd.nextDouble() * size / 2 - size / 4;
+        if (current.getLength() > Universe.size * 5) {
+            this.isAlive = false;
+            /*this.current.x = rnd.nextDouble() * size / 2 - size / 4;
             this.current.y = rnd.nextDouble() * 200 - 100;
             this.delta.x = 0;
             if (this.current.x > 0) {
                 this.delta.y = rnd.nextDouble()*0.1;
             } else {
                 this.delta.y = -rnd.nextDouble()*0.1;
-            }
+            }*/
             /*current.x = 0;
             current.y = 0;
             delta.x = 0;
             delta.y =0;*/
         }
-        /*if (delta.x > Universe.C) delta.x = Universe.C;
-        if (delta.y > Universe.C) delta.y = Universe.C;*/
+        if (delta.x > Universe.C) delta.x = Universe.C;
+        if (delta.y > Universe.C) delta.y = Universe.C;
     }
 }
