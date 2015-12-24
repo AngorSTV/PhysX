@@ -8,19 +8,22 @@ import java.util.List;
  */
 public class DrawPanel extends JPanel implements Runnable {
 
-    private static final int maxThreads = 20;
+    private int maxThreads;
     private long t;
     private double fps;
     private double totalMass = 0;
     private static double totalFrame = 0;
     private List<Star> stars;
-    private Thread th[] = new Thread[maxThreads];
+    private Thread th[];
     private Star star;
 
 
     public DrawPanel(List<Star> stars) {
         super();
         this.stars = stars;
+        int processors = Runtime.getRuntime().availableProcessors();
+        maxThreads = processors * 4;
+        this.th = new Thread[maxThreads];
         // подсчёт общей массы
         for (Star star : stars) {
             totalMass = totalMass + star.m;
@@ -34,7 +37,9 @@ public class DrawPanel extends JPanel implements Runnable {
     @Override
     public void run() {
         long t1;
+        int count =0;
         while (true) {
+            count++;
             t1 = System.currentTimeMillis();
 
             //Чистка масива от мёртвых объектов

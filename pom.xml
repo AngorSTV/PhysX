@@ -7,18 +7,7 @@
 
     <groupId>angorstv.ru</groupId>
     <artifactId>PhysX</artifactId>
-    <version>0.1</version>
-
-    <scm>
-        <connection>scm:git:file:///D:/test_repo/</connection>
-    </scm>
-    <distributionManagement>
-        <repository>
-            <id>localSnap</id>
-            <name>RepositoryProxyRel</name>
-            <url>file:///D:/test_repo/</url>
-        </repository>
-    </distributionManagement>
+    <version>1.0</version>
 
     <build>
         <plugins>
@@ -31,17 +20,13 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <tagBase>git:file:///D:/test_repo/tags</tagBase>
-                    <branchBase>git:file:///D:/test_repo/branches</branchBase>
-                    <preparationGoals>clean install</preparationGoals>
-                    <goals>deploy</goals>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+    </dependencies>
 </project>

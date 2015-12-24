@@ -3,8 +3,8 @@
  * можно использовать как класический вектор, так и как просто указатель координат
  */
 public class Vector2D {
-    public double x;
-    public double y;
+    public double x; // r - в полярной системе
+    public double y; // t - угол
 
     public Vector2D(){
         this.x = 0;
@@ -51,5 +51,25 @@ public class Vector2D {
     public void mult (double factor){
         this.x = this.x*factor;
         this.y = this.y*factor;
+    }
+
+    // конвертация радиального вектора в декартовский
+    public void polarToDecart (){
+        double r = x;
+        x = r * Math.cos(y);
+        y = r * Math.sin(y);
+    }
+    // поворот вектора на 90 градусов
+    // true - почасовой стрелке
+    // false - против часовой
+    public void ortogonale (boolean direct) {
+        double newX = x;
+        if (direct){
+            x = y;
+            y = -newX;
+        }else{
+            x = -y;
+            y = newX;
+        }
     }
 }
