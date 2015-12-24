@@ -102,7 +102,7 @@ public class DrawPanel extends JPanel implements Runnable {
         }
 
         g.drawString("Total stars:" + stars.size(), 1, 15);
-        g.drawString("Change mass: " + String.valueOf((int) (totalMass - carentTotalMass)), 1, 30);
+        g.drawString("Change mass: " + String.valueOf((int) (carentTotalMass -totalMass)), 1, 30);
         g.drawString("Total frame:" + String.valueOf((int) totalFrame), 1, 45);
         g.drawString("FPS: " + String.valueOf((int) fps), 1, 60);
         g.drawString("Width: " + String.valueOf(width), 1, 75);
