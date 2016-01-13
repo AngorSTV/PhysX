@@ -75,8 +75,8 @@ public class Star implements Runnable{
             current.y = Universe.size;
             delta.y = delta.y * 0.9;
         }*/
-        if (current.getLength() > Universe.size * 5) {
-            this.isAlive = false;
+        if (current.getLength() > Universe.size * 2) {
+            //this.isAlive = false;
             /*this.current.x = rnd.nextDouble() * size / 2 - size / 4;
             this.current.y = rnd.nextDouble() * 200 - 100;
             this.delta.x = 0;
@@ -89,6 +89,13 @@ public class Star implements Runnable{
             current.y = 0;
             delta.x = 0;
             delta.y =0;*/
+            Vector2D v = new Vector2D((rnd.nextDouble() * size / 2) + 100, rnd.nextDouble() * Math.PI * 2);
+            v.polarToDecart();
+            Vector2D speed = new Vector2D(v);
+            speed.mult(Math.sqrt(Universe.G*3/v.getLength())*rnd.nextDouble()*0.4);
+            speed.ortogonale(true);
+            this.current = v;
+            this.delta = speed;
         }
         if (delta.x > Universe.C) delta.x = Universe.C;
         if (delta.y > Universe.C) delta.y = Universe.C;

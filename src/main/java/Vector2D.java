@@ -48,8 +48,10 @@ public class Vector2D {
     // нормализация вектора
     public void normalize (){
         double length = this.getLength();
-        this.x = this.x/length;
-        this.y = this.y/length;
+        if (length!=0) {
+            this.x = this.x / length;
+            this.y = this.y / length;
+        }
     }
 
     // умножение вектора на число

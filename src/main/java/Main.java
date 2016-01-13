@@ -14,7 +14,7 @@ public class Main extends JFrame {
         polarStars(stars);
         //initSolarSystem(stars);
         //initAlfaSystem(stars);
-        initBlackHoleSun(stars);
+        //initBlackHoleSun(stars);
 
         DrawPanel panel = new DrawPanel(stars);
         panel.setPreferredSize(new Dimension(600, 600));
@@ -60,10 +60,8 @@ public class Main extends JFrame {
         for (int i = 0; i < Universe.starsQuantity; i++) {
             Vector2D v = new Vector2D((rnd.nextDouble() * size / 2) + 100, rnd.nextDouble() * Math.PI * 2);
             v.polarToDecart();
-
             Vector2D speed = new Vector2D(v);
-            //speed.normalize();
-            speed.mult(Math.sqrt(Universe.G*3/v.getLength())*rnd.nextDouble()*0.35);
+            speed.mult(Math.sqrt(Universe.G*3/v.getLength())*rnd.nextDouble()*0.3);
             speed.ortogonale(true);
             //Vector2D speed = new Vector2D(0, 0);
             Star star = new Star(v, stars);
