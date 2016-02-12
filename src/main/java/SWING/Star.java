@@ -1,3 +1,7 @@
+package SWING;
+
+import common.Vector2D;
+
 import java.util.List;
 import java.util.Random;
 
@@ -59,20 +63,20 @@ public class Star implements Runnable{
         //if (this.m < 5000) {
             current.add(delta);
         //}
-        /*if (current.x > Universe.size) {
-            current.x = -Universe.size;
+        /*if (current.x > SWING.Universe.size) {
+            current.x = -SWING.Universe.size;
             delta.x = delta.x * 0.9;
         }
-        if (current.x < -Universe.size) {
-            current.x = Universe.size;
+        if (current.x < -SWING.Universe.size) {
+            current.x = SWING.Universe.size;
             delta.x = delta.x * 0.9;
         }
-        if (current.y > Universe.size) {
-            current.y = -Universe.size;
+        if (current.y > SWING.Universe.size) {
+            current.y = -SWING.Universe.size;
             delta.y = delta.y * 0.9;
         }
-        if (current.y < -Universe.size) {
-            current.y = Universe.size;
+        if (current.y < -SWING.Universe.size) {
+            current.y = SWING.Universe.size;
             delta.y = delta.y * 0.9;
         }*/
         if (current.getLength() > Universe.size * 2) {

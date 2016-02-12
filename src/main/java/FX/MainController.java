@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
  * Created by Андрей on 12.02.2016.
  */
 public class MainController {
+    Universe universe;
     @FXML
     private TextField stars;
     @FXML
@@ -17,7 +18,7 @@ public class MainController {
     @FXML
     private TextField universeSize;
     @FXML
-    private Slider distirtionSpace;
+    private Slider distortionSpace;
     @FXML
     private Canvas canva;
     @FXML
@@ -32,9 +33,12 @@ public class MainController {
     @FXML
     private void initialize(){
 
+        //stars.setText(String.valueOf(universe.getStarsQuantity()));
     }
 
     public void setMainClass (Start mainClass){
         this.mainClass = mainClass;
+        universe = mainClass.getUniverse();
+        stars.setText(String.valueOf(universe.getStarsQuantity()));
     }
 }

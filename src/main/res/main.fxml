@@ -50,7 +50,7 @@
                      </padding>
                   </Label>
                   <TextField fx:id="massRange" prefHeight="25.0" prefWidth="50.0" />
-                  <Label text="Universe size">
+                  <Label text="SWING.Universe size">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
@@ -61,7 +61,7 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <Slider fx:id="distirtionSpace" />
+                  <Slider fx:id="distortionSpace" />
               </items>
             </ToolBar>
          </children>

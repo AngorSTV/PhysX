@@ -1,3 +1,7 @@
+package SWING;
+
+import common.Vector2D;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
@@ -46,7 +50,7 @@ public class Main extends JFrame {
         for (int i = 0; i < Universe.starsQuantity; i++) {
             Vector2D v = new Vector2D(rnd.nextDouble() * size / 2 - size / 4, rnd.nextDouble() * size / 2 - size / 4);
             Vector2D speed = new Vector2D((rnd.nextDouble() - 0.5) * 0.1, (rnd.nextDouble() - 0.5) * 0.1);
-            //Vector2D speed = new Vector2D(0, 0);
+            //common.Vector2D speed = new common.Vector2D(0, 0);
             Star star = new Star(v, stars);
             star.delta = speed;
             star.m = rnd.nextDouble() * Universe.massBand + 1;
@@ -63,7 +67,6 @@ public class Main extends JFrame {
             Vector2D speed = new Vector2D(v);
             speed.mult(Math.sqrt(Universe.G*3/v.getLength())*rnd.nextDouble()*0.3);
             speed.ortogonale(true);
-            //Vector2D speed = new Vector2D(0, 0);
             Star star = new Star(v, stars);
             star.delta = speed;
             star.m = rnd.nextDouble() * Universe.massBand + 1;
@@ -137,7 +140,7 @@ public class Main extends JFrame {
         for (int i = 0; i < Universe.starsQuantity; i++) {
             Vector2D v = new Vector2D(-rnd.nextDouble() * size / 2, rnd.nextDouble() * (size / 10) - (size / 20));
             Vector2D speed = new Vector2D(0, -rnd.nextDouble());
-            //Vector2D speed = new Vector2D(0, 0);
+            //common.Vector2D speed = new common.Vector2D(0, 0);
             Star star = new Star(v, stars);
             star.delta = speed;
             star.m = rnd.nextDouble() * Universe.massBand;
@@ -146,7 +149,7 @@ public class Main extends JFrame {
         for (int i = 0; i < Universe.starsQuantity; i++) {
             Vector2D v = new Vector2D(rnd.nextDouble() * size / 2, rnd.nextDouble() * (size / 10) - (size / 20));
             Vector2D speed = new Vector2D(0, rnd.nextDouble() * 0.5);
-            //Vector2D speed = new Vector2D(0, 0);
+            //common.Vector2D speed = new common.Vector2D(0, 0);
             Star star = new Star(v, stars);
             star.delta = speed;
             star.m = rnd.nextDouble() * Universe.massBand;

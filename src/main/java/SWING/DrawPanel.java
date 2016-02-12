@@ -1,3 +1,5 @@
+package SWING;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Iterator;

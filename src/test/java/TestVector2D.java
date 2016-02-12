@@ -1,3 +1,4 @@
+import common.Vector2D;
 import org.junit.Test;
 
 /**
