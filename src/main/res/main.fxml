@@ -6,15 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FX.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FX.MainController">
    <center>
-      <Canvas fx:id="canva" height="200.0" width="200.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="canvas" height="300.0" width="680.0" BorderPane.alignment="TOP_CENTER" />
    </center>
    <bottom>
       <Pane fx:id="pane" prefHeight="43.0" prefWidth="681.0" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="66.0" prefWidth="681.0" BorderPane.alignment="CENTER">
          <children>
             <MenuBar>
               <menus>
@@ -37,20 +37,20 @@
             </MenuBar>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                <Button mnemonicParsing="false" text="Start" textAlignment="CENTER" />
+                <Button mnemonicParsing="false" onAction="#hendleStart" text="Start" textAlignment="CENTER" />
                   <Label text="Stars">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="stars" prefHeight="25.0" prefWidth="50.0" />
+                  <TextField fx:id="starsQuantity" prefHeight="25.0" prefWidth="50.0" />
                   <Label text="Mass range">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
                   </Label>
                   <TextField fx:id="massRange" prefHeight="25.0" prefWidth="50.0" />
-                  <Label text="SWING.Universe size">
+                  <Label text="Universe size">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
@@ -61,7 +61,7 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <Slider fx:id="distortionSpace" />
+                  <Slider fx:id="distortionSpace" blockIncrement="0.1" max="2.0" min="1.0" />
               </items>
             </ToolBar>
          </children>

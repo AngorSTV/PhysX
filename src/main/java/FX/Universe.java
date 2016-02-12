@@ -14,6 +14,7 @@ public class Universe {
     private double SH = 0.03; // радиус сферы Шварцшильда
     private double C = 100000; // скорость света
     private int size = 1000; // размер вселенной
+    private double distortionSpace = 2;
 
     private int starsQuantity = 1000;
     private int massBand = 100;
@@ -91,7 +92,15 @@ public class Universe {
         this.stars = stars;
     }
 
+    public double getDistortionSpace() {
+        return distortionSpace;
+    }
+
+    public void setDistortionSpace(double distortionSpace) {
+        this.distortionSpace = distortionSpace;
+    }
+
     public double gravitation(double m2, double r) {
-        return G * m2 / Math.pow(r, 2);
+        return G * m2 / Math.pow(r, distortionSpace);
     }
 }
