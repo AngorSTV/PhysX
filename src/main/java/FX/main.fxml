@@ -6,13 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FX.MainController">
    <center>
-      <Canvas height="200.0" width="200.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="canva" height="200.0" width="200.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <Pane prefHeight="43.0" prefWidth="681.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="pane" prefHeight="43.0" prefWidth="681.0" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -44,25 +43,25 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <TextField prefHeight="25.0" prefWidth="50.0" />
+                  <TextField fx:id="stars" prefHeight="25.0" prefWidth="50.0" />
                   <Label text="Mass range">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <TextField prefHeight="25.0" prefWidth="50.0" />
+                  <TextField fx:id="massRange" prefHeight="25.0" prefWidth="50.0" />
                   <Label text="Universe size">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <TextField prefHeight="25.0" prefWidth="50.0" />
+                  <TextField fx:id="universeSize" prefHeight="25.0" prefWidth="50.0" />
                   <Label text="Distortion space">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <Slider />
+                  <Slider fx:id="distirtionSpace" />
               </items>
             </ToolBar>
          </children>

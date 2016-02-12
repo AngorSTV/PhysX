@@ -21,7 +21,7 @@ public class Start extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Start.class.getClassLoader().getResource("main.fxml"));
+            loader.setLocation(Start.class.getClassLoader().getResource("./FX/main.fxml"));
             BorderPane rootLayout = (BorderPane) loader.load();
 
             Scene scene = new Scene(rootLayout);
