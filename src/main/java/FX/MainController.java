@@ -1,5 +1,6 @@
 package FX;
 
+import javafx.animation.AnimationTimer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,11 +8,13 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import org.controlsfx.control.StatusBar;
 
 import java.util.Iterator;
 import java.util.List;
@@ -55,7 +58,12 @@ public class MainController {
     @FXML
     private void initialize(){
         dsi.bind(distortionSpace.valueProperty());
-        distortionIndicator.textProperty().bind(dsi.asString());
+        distortionIndicator.textProperty().bind(dsi.asString("%.1f"));
+        /*StatusBar statusBar = new StatusBar();
+        statusBar.getLeftItems().add(new Button("Info"));
+        statusBar.setProgress(.5);
+        statusBar.setMaxWidth(600);
+        pane.getChildren().addAll(statusBar);*/
     }
 
     public void setMainClass (Start mainClass){
@@ -66,8 +74,6 @@ public class MainController {
         massRange.setText(String.valueOf(universe.getMassBand()));
         universeSize.setText(String.valueOf(universe.getSize()));
         distortionSpace.setValue(universe.getDistortionSpace());
-
-
     }
 
     @FXML
@@ -76,30 +82,42 @@ public class MainController {
         int processors = Runtime.getRuntime().availableProcessors();
         maxThreads = processors * 4;
         this.th = new Thread[maxThreads];
+
         //сбор параметров из ГУИ
         universe.setStarsQuantity(Integer.valueOf(starsQuantity.getText()));
         universe.setMassBand(Integer.valueOf(massRange.getText()));
         universe.setSize(Integer.valueOf(universeSize.getText()));
+        universe.setDistortionSpace(distortionSpace.getValue());
 
         universe.create();
+        stars = universe.getStars();
+
         // подсчёт общей массы
         for (Star star : stars) {
             totalMass = totalMass + star.m;
         }
         long t1;
+
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+
+            }
+        };
+
         while (true) {
 
             t1 = System.currentTimeMillis();
 
             //Чистка масива от мёртвых объектов
-            Iterator<Star> iStar = universe.getStars().iterator();
+            Iterator<Star> iStar = stars.iterator();
             while (iStar.hasNext()) {
                 if (!iStar.next().isAlive) iStar.remove();
             }
 
             multiTwo();
 
-            for (Star star2 : universe.getStars()) {
+            for (Star star2 : stars) {
                 star2.Move();
             }
 
@@ -120,6 +138,7 @@ public class MainController {
     }
 
     private void paint (GraphicsContext gc){
+        System.out.println("paint" + universe.getStarsQuantity());
         double width = canvas.getWidth();
         double height = canvas.getHeight();
         double ratio = height/(universe.getSize()*2);
@@ -132,14 +151,14 @@ public class MainController {
         gc.setFill(Color.WHITE);
         gc.setStroke(Color.WHITE);
 
-        //totalFrame++;
+        totalFrame++;
 
         double currentTotalMass = 0;
-        for (Star star : universe.getStars()) {
+        for (Star star : stars) {
             currentTotalMass = currentTotalMass + star.m;
         }
 
-        for (Star star : universe.getStars()) {
+        for (Star star : stars) {
             x = (int) (ratio * star.current.x);
             y = (int) (ratio * star.current.y);
             r = (int) (ratio * Math.sqrt(star.m) * 0.5);
@@ -150,9 +169,9 @@ public class MainController {
         }
 
         starsQuantity.setText(String.valueOf(universe.getStarsQuantity()));
-        massRange.setText(String.valueOf(universe.getMassBand()));
-        universeSize.setText(String.valueOf(universe.getSize()));
-        distortionSpace.setValue(universe.getDistortionSpace());
+        //massRange.setText(String.valueOf(universe.getMassBand()));
+        //universeSize.setText(String.valueOf(universe.getSize()));
+        //distortionSpace.setValue(universe.getDistortionSpace());
         //g.drawString("Total starsQuantity:" + starsQuantity.size(), 1, 15);
         //gc.drawString("Change mass: " + String.valueOf((int) (currentTotalMass -totalMass)), 1, 30);
         //g.drawString("Total frame:" + String.valueOf((int) totalFrame), 1, 45);
@@ -161,10 +180,10 @@ public class MainController {
     }
 
     private void multiTwo() {
-        int band = universe.getStars().size() / maxThreads;
+        int band = stars.size() / maxThreads;
 
         for (int i = 0; i < maxThreads; i++) {
-            Domen domen = new Domen(universe.getStars().subList(i * band, i * band + band));
+            Domen domen = new Domen(stars.subList(i * band, i * band + band));
             th[i] = new Thread(domen);
             th[i].start();
         }
@@ -176,7 +195,7 @@ public class MainController {
                 e.printStackTrace();
             }
         }
-        Domen domen = new Domen(universe.getStars().subList(band * maxThreads, universe.getStars().size()));
+        Domen domen = new Domen(stars.subList(band * maxThreads, stars.size()));
         th[0] = new Thread(domen);
         th[0].start();
         try {

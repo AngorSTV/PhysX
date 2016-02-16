@@ -61,7 +61,10 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <Slider fx:id="distortionSpace" blockIncrement="0.1" max="2.0" min="1.0" />
+                  <Slider fx:id="distortionSpace" blockIncrement="0.1" max="2.0" min="1.0" showTickLabels="true">
+                     <opaqueInsets>
+                        <Insets left="5.0" />
+                     </opaqueInsets></Slider>
                   <Label fx:id="distortionIndicator" text="2">
                      <padding>
                         <Insets left="5.0" />

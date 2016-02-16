@@ -19,6 +19,7 @@ public class Star implements Runnable{
     public Star(Vector2D vector, List <Star> stars) {
         current = vector;
         this.stars = stars;
+        this.delta = new Vector2D();
     }
 
     public void run() {

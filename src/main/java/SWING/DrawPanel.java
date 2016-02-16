@@ -1,9 +1,17 @@
 package SWING;
 
+import common.Vector2D;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Angor on 23.11.2015.
@@ -13,9 +21,12 @@ public class DrawPanel extends JPanel implements Runnable {
     private int maxThreads;
     private long t;
     private double fps;
+    private double zoom = 0;
+    private double ratio;
     private double totalMass = 0;
     private static double totalFrame = 0;
     private List<Star> stars;
+    private List<Star> newStars = new ArrayList<>();
     private Thread th[];
     private Star star;
 
@@ -33,6 +44,23 @@ public class DrawPanel extends JPanel implements Runnable {
 
         setBackground(new Color(0));
         setForeground(new Color(255, 255, 255));
+        this.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Random rnd = new Random();
+                Vector2D vector = new Vector2D((e.getX() - getWidth()/2)/ratio, (e.getY()-getHeight()/2)/ratio);
+                Star star = new Star(vector, stars);
+                star.m = rnd.nextDouble() * Universe.massBand + 1;
+                totalMass = totalMass + star.m;
+                newStars.add(star);
+            }
+        });
+        this.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                zoom = zoom + e.getWheelRotation();
+            }
+        });
         new Thread(this).start();
     }
 
@@ -49,6 +77,10 @@ public class DrawPanel extends JPanel implements Runnable {
             while (iStar.hasNext()) {
                 if (!iStar.next().isAlive) iStar.remove();
             }
+
+            //добавление новых звёзд
+            stars.addAll(newStars);
+            newStars.clear();
 
             //multiOne();
             multiTwo();
@@ -81,7 +113,8 @@ public class DrawPanel extends JPanel implements Runnable {
         int width = getWidth();
         int height = getHeight();
 
-        double ratio = (double) height / (Universe.size * 2);
+        ratio = (double) height / (Universe.size * 2);
+        ratio = ratio + zoom/20;
 
         int x, y, r;
 
@@ -107,7 +140,7 @@ public class DrawPanel extends JPanel implements Runnable {
         g.drawString("Change mass: " + String.valueOf((int) (carentTotalMass -totalMass)), 1, 30);
         g.drawString("Total frame:" + String.valueOf((int) totalFrame), 1, 45);
         g.drawString("FPS: " + String.valueOf((int) fps), 1, 60);
-        g.drawString("Width: " + String.valueOf(width), 1, 75);
+        g.drawString("Ratio: " + String.valueOf(ratio), 1, 75);
 
     }
 
