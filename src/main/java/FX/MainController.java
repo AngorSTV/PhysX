@@ -1,8 +1,13 @@
 package FX;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -34,6 +39,9 @@ public class MainController {
     @FXML
     private Slider distortionSpace;
     @FXML
+    private Label distortionIndicator;
+    DoubleProperty dsi = new SimpleDoubleProperty();
+    @FXML
     private Canvas canvas;
     @FXML
     private Pane pane;
@@ -46,7 +54,8 @@ public class MainController {
 
     @FXML
     private void initialize(){
-
+        dsi.bind(distortionSpace.valueProperty());
+        distortionIndicator.textProperty().bind(dsi.asString());
     }
 
     public void setMainClass (Start mainClass){
@@ -58,6 +67,7 @@ public class MainController {
         universeSize.setText(String.valueOf(universe.getSize()));
         distortionSpace.setValue(universe.getDistortionSpace());
 
+
     }
 
     @FXML
@@ -66,8 +76,14 @@ public class MainController {
         int processors = Runtime.getRuntime().availableProcessors();
         maxThreads = processors * 4;
         this.th = new Thread[maxThreads];
+        //сбор параметров из ГУИ
+        universe.setStarsQuantity(Integer.valueOf(starsQuantity.getText()));
+        universe.setMassBand(Integer.valueOf(massRange.getText()));
+        universe.setSize(Integer.valueOf(universeSize.getText()));
+
+        universe.create();
         // подсчёт общей массы
-        for (Star star : universe.getStars()) {
+        for (Star star : stars) {
             totalMass = totalMass + star.m;
         }
         long t1;

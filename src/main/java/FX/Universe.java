@@ -19,9 +19,14 @@ public class Universe {
     private int starsQuantity = 1000;
     private int massBand = 100;
 
-    private List<Star> stars = new LinkedList<>();
+    private List<Star> stars;
 
     public Universe() {
+        create();
+    }
+
+    public void create () {
+        stars = new LinkedList<>();
         Random rnd = new Random();
         for (int i = 0; i < starsQuantity; i++) {
             Vector2D v = new Vector2D((rnd.nextDouble() * size) + 100, rnd.nextDouble() * Math.PI * 2);
