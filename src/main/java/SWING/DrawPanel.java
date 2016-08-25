@@ -58,7 +58,7 @@ public class DrawPanel extends JPanel implements Runnable {
         this.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                zoom = zoom + e.getWheelRotation();
+                zoom = zoom - e.getWheelRotation();
             }
         });
         new Thread(this).start();
