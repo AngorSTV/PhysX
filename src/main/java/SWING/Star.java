@@ -28,23 +28,17 @@ public class Star implements Runnable{
         //synchronized (this) {
             for (Star star : stars) {
                 if (star != this && star.isAlive) {
-                    r = current.distance(star.current);
+                    //r = current.distance(star.current);
+                    r = current.distance2(star.current);
                     // поглощение другой звёзды
-                    if (r < Universe.SH * Math.sqrt(m)) {
+                    if (r < Universe.SH * Universe.SH) {
                         synchronized (star){
                             if (m >= star.m) {
                                 m = m + star.m;
                                 star.delta.mult(star.m / (2*m));
                                 this.delta.add(star.delta);
                                 star.isAlive = false;
-                                //break;
-                            } /*else {
-                                star.m = m + star.m;
-                                delta.mult(m / star.m);
-                                star.delta.add(delta);
-                                this.isAlive = false;
-                                break;
-                            }*/
+                            }
                         }
                     }
 
@@ -80,7 +74,7 @@ public class Star implements Runnable{
             current.y = SWING.Universe.size;
             delta.y = delta.y * 0.9;
         }*/
-        if (current.getLength() > Universe.size * 2) {
+        if (current.getLength() > Universe.size * 4) {
             //this.isAlive = false;
             /*this.current.x = rnd.nextDouble() * size / 2 - size / 4;
             this.current.y = rnd.nextDouble() * 200 - 100;

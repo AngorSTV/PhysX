@@ -39,12 +39,21 @@ public class Vector2D {
 
     // растояние между двумя точками заданными векторами
     public double distance(Vector2D other){
-        return Math.sqrt(Math.pow((this.x - other.x), 2) + Math.pow((this.y - other.y),2));
+        double a = this.x - other.x;
+        double b = this.y - other.y;
+        return Math.sqrt(a * a + b * b);
+    }
+
+    //квадрат расстояния между двумя точками
+    public double distance2(Vector2D other){
+        double a = this.x - other.x;
+        double b = this.y - other.y;
+        return a * a + b * b;
     }
 
     // длина вектора
     public double getLength (){
-        return Math.sqrt(Math.pow((this.x), 2) + Math.pow((this.y),2));
+        return Math.sqrt(x * x + y * y);
     }
 
     // нормализация вектора

@@ -38,9 +38,9 @@ public class DrawPanel extends JPanel implements Runnable {
         maxThreads = processors * 4;
         this.th = new Thread[maxThreads];
         // подсчёт общей массы
-        for (Star star : stars) {
+        /*for (Star star : stars) {
             totalMass = totalMass + star.m;
-        }
+        }*/
 
         setBackground(new Color(0));
         setForeground(new Color(255, 255, 255));
@@ -83,7 +83,8 @@ public class DrawPanel extends JPanel implements Runnable {
             newStars.clear();
 
             //multiOne();
-            multiTwo();
+            //multiTwo();
+            multiZero();
 
             for (Star star2 : stars) {
                 //single(star2);
@@ -137,11 +138,15 @@ public class DrawPanel extends JPanel implements Runnable {
         }
 
         g.drawString("Total stars:" + stars.size(), 1, 15);
-        g.drawString("Change mass: " + String.valueOf((int) (carentTotalMass -totalMass)), 1, 30);
+        //g.drawString("Change mass: " + String.valueOf((int) (carentTotalMass -totalMass)), 1, 30);
         g.drawString("Total frame:" + String.valueOf((int) totalFrame), 1, 45);
         g.drawString("FPS: " + String.valueOf((int) fps), 1, 60);
         g.drawString("Ratio: " + String.valueOf(ratio), 1, 75);
 
+    }
+
+    private void multiZero(){
+        stars.parallelStream().forEach((star)->star.run());
     }
 
     private void multiOne() {
