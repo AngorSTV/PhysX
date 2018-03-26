@@ -18,7 +18,7 @@ public class Main extends JFrame {
         polarStars(stars);
         //initSolarSystem(stars);
         //initAlfaSystem(stars);
-        //initBlackHoleSun(stars);
+        initBlackHoleSun(stars);
 
         DrawPanel panel = new DrawPanel(stars);
         panel.setPreferredSize(new Dimension(600, 600));
@@ -65,7 +65,7 @@ public class Main extends JFrame {
             Vector2D v = new Vector2D((rnd.nextDouble() * size / 2) + 100, rnd.nextDouble() * Math.PI * 2);
             v.polarToDecart();
             Vector2D speed = new Vector2D(v);
-            speed.mult(Math.sqrt(Universe.G*3/v.getLength())*rnd.nextDouble()*0.3);
+            speed.mult(Math.sqrt(Universe.G*3/v.getLength())*rnd.nextDouble()*0.6);
             speed.ortogonale(true);
             Star star = new Star(v, stars);
             star.delta = speed;
@@ -137,18 +137,20 @@ public class Main extends JFrame {
     private void initAlfaSystem(List<Star> stars) {
         Random rnd = new Random();
         int size = Universe.size * 2;
-        for (int i = 0; i < Universe.starsQuantity; i++) {
+        for (int i = 0; i < Universe.starsQuantity/2; i++) {
             Vector2D v = new Vector2D(-rnd.nextDouble() * size / 2, rnd.nextDouble() * (size / 10) - (size / 20));
             Vector2D speed = new Vector2D(0, -rnd.nextDouble());
+            speed.ortogonale(true);
             //common.Vector2D speed = new common.Vector2D(0, 0);
             Star star = new Star(v, stars);
             star.delta = speed;
             star.m = rnd.nextDouble() * Universe.massBand;
             stars.add(star);
         }
-        for (int i = 0; i < Universe.starsQuantity; i++) {
+        for (int i = 0; i < Universe.starsQuantity/2; i++) {
             Vector2D v = new Vector2D(rnd.nextDouble() * size / 2, rnd.nextDouble() * (size / 10) - (size / 20));
             Vector2D speed = new Vector2D(0, rnd.nextDouble() * 0.5);
+            speed.ortogonale(true);
             //common.Vector2D speed = new common.Vector2D(0, 0);
             Star star = new Star(v, stars);
             star.delta = speed;
@@ -156,12 +158,12 @@ public class Main extends JFrame {
             stars.add(star);
         }
         //BlackHole
-        Vector2D point = new Vector2D(0, 0);
+        /*Vector2D point = new Vector2D(0, 0);
         Vector2D speed = new Vector2D(0, 0);
         Star star = new Star(point, stars);
         star.delta = speed;
         star.m = 30000.0;
-        stars.add(star);
+        stars.add(star);*/
     }
 
     private void initBlackHoleSun(List<Star> stars) {
@@ -169,7 +171,7 @@ public class Main extends JFrame {
         Vector2D speed = new Vector2D(0, 0);
         Star star = new Star(point, stars);
         star.delta = speed;
-        star.m = 50000.0;
+        star.m = 20000.0;
         stars.add(star);
     }
 

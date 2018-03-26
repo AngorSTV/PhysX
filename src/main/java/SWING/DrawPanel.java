@@ -38,9 +38,9 @@ public class DrawPanel extends JPanel implements Runnable {
         maxThreads = processors * 4;
         this.th = new Thread[maxThreads];
         // подсчёт общей массы
-        /*for (Star star : stars) {
+        for (Star star : stars) {
             totalMass = totalMass + star.m;
-        }*/
+        }
 
         setBackground(new Color(0));
         setForeground(new Color(255, 255, 255));
@@ -58,7 +58,7 @@ public class DrawPanel extends JPanel implements Runnable {
         this.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                zoom = zoom - e.getWheelRotation();
+                zoom = zoom - (double)e.getWheelRotation()/2;
             }
         });
         new Thread(this).start();
@@ -82,12 +82,9 @@ public class DrawPanel extends JPanel implements Runnable {
             stars.addAll(newStars);
             newStars.clear();
 
-            //multiOne();
-            //multiTwo();
             multiZero();
 
             for (Star star2 : stars) {
-                //single(star2);
                 star2.Move();
             }
 
@@ -97,7 +94,6 @@ public class DrawPanel extends JPanel implements Runnable {
                 long pause = 16 - t;
                 if (pause < 0) pause = 0;
                 if (pause > 16) pause =16;
-                //System.out.println(pause);
                 Thread.sleep(pause);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -138,7 +134,7 @@ public class DrawPanel extends JPanel implements Runnable {
         }
 
         g.drawString("Total stars:" + stars.size(), 1, 15);
-        //g.drawString("Change mass: " + String.valueOf((int) (carentTotalMass -totalMass)), 1, 30);
+        g.drawString("Change mass: " + String.valueOf((int) (carentTotalMass -totalMass)), 1, 30);
         g.drawString("Total frame:" + String.valueOf((int) totalFrame), 1, 45);
         g.drawString("FPS: " + String.valueOf((int) fps), 1, 60);
         g.drawString("Ratio: " + String.valueOf(ratio), 1, 75);
@@ -149,7 +145,7 @@ public class DrawPanel extends JPanel implements Runnable {
         stars.parallelStream().forEach((star)->star.run());
     }
 
-    private void multiOne() {
+    /*private void multiOne() {
         Iterator<Star> iStar = stars.iterator();
         iStar = stars.iterator();
 
@@ -225,5 +221,5 @@ public class DrawPanel extends JPanel implements Runnable {
                 single(star);
             }
         }
-    }
+    }*/
 }
