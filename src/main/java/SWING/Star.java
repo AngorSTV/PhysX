@@ -30,7 +30,7 @@ public class Star implements Runnable {
                 //r = current.distance(star.current);
                 r = current.distance2(star.current);
                 // поглощение другой звёзды
-                if (r < Universe.SH * Universe.SH) {
+                if (r < Universe.SH * m/2) {
                     synchronized (star) {
                         if (m >= star.m) {
                             m = m + star.m;
@@ -39,22 +39,22 @@ public class Star implements Runnable {
                             star.isAlive = false;
                         }
                     }
+                } else {
+                    forceVector = current.sub(star.current);
+                    forceVector.normalize();
+                    force = Universe.gravitation(star.m, r);
+                    forceVector.mult(force);
+                    delta.add(forceVector);
                 }
-
-                forceVector = current.sub(star.current);
-                forceVector.normalize();
-                force = Universe.gravitation(star.m, r);
-                forceVector.mult(force);
-                delta.add(forceVector);
             }
         }
     }
 
-    public void Move() {
+    public void move() {
         Random rnd = new Random();
         int size = Universe.size * 2;
         current.add(delta);
-        if (current.getLength() > Universe.size * 4) {
+        if (current.getLength() > Universe.size * 10) {
             Vector2D v = new Vector2D((rnd.nextDouble() * size / 2) + 100, rnd.nextDouble() * Math.PI * 2);
             v.polarToDecart();
             Vector2D speed = new Vector2D(v);

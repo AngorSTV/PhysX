@@ -65,7 +65,7 @@ public class Main extends JFrame {
             Vector2D v = new Vector2D((rnd.nextDouble() * size / 2) + 100, rnd.nextDouble() * Math.PI * 2);
             v.polarToDecart();
             Vector2D speed = new Vector2D(v);
-            speed.mult(Math.sqrt(Universe.G*3/v.getLength())*rnd.nextDouble()*0.6);
+            speed.mult(Math.sqrt(Universe.G*0.1/v.getLength())*rnd.nextDouble());
             speed.ortogonale(true);
             Star star = new Star(v, stars);
             star.delta = speed;
