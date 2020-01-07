@@ -12,13 +12,13 @@ public class Main extends JFrame {
 
     Main(String s) {
         super(s);
-        List<Star> stars = new LinkedList<>();
+        List<Star> stars = new ArrayList<>();
 
         //initStars(stars);
         polarStars(stars);
         //initSolarSystem(stars);
         //initAlfaSystem(stars);
-        initBlackHoleSun(stars);
+        //initBlackHoleSun(stars);
 
         DrawPanel panel = new DrawPanel(stars);
         panel.setPreferredSize(new Dimension(600, 600));

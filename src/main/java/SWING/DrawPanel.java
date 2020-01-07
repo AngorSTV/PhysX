@@ -18,7 +18,6 @@ import java.util.Random;
  */
 public class DrawPanel extends JPanel implements Runnable {
 
-    //private int maxThreads;
     private long t;
     private double fps;
     private double zoom = 1;
@@ -27,9 +26,6 @@ public class DrawPanel extends JPanel implements Runnable {
     private static double totalFrame = 0;
     private List<Star> stars;
     private List<Star> newStars = new ArrayList<>();
-    //private Thread th[];
-    //private Star star;
-
 
     public DrawPanel(List<Star> stars) {
         super();
@@ -41,11 +37,11 @@ public class DrawPanel extends JPanel implements Runnable {
 
         setBackground(new Color(0));
         setForeground(new Color(255, 255, 255));
-        this.addMouseListener(new MouseAdapter(){
+        this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Random rnd = new Random();
-                Vector2D vector = new Vector2D((e.getX() - getWidth()/2)/ratio, (e.getY()-getHeight()/2)/ratio);
+                Vector2D vector = new Vector2D((e.getX() - getWidth() / 2) / ratio, (e.getY() - getHeight() / 2) / ratio);
                 Star star = new Star(vector, stars);
                 star.m = rnd.nextDouble() * Universe.massBand + 1;
                 totalMass = totalMass + star.m;
@@ -55,7 +51,7 @@ public class DrawPanel extends JPanel implements Runnable {
         this.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                zoom = zoom - (double)e.getWheelRotation()/2;
+                zoom = zoom - (double) e.getWheelRotation() / 2;
             }
         });
         new Thread(this).start();
@@ -74,7 +70,7 @@ public class DrawPanel extends JPanel implements Runnable {
             newStars.clear();
 
             //расчёт сил гравитации на каждую звезду
-            stars.parallelStream().forEach((star)->star.run());
+            stars.parallelStream().unordered().forEach(star -> star.run());
 
             //Чистка масива от мёртвых объектов
             Iterator<Star> iStar = stars.iterator();
@@ -83,14 +79,14 @@ public class DrawPanel extends JPanel implements Runnable {
             }
 
             //перемещение звёзд
-            stars.parallelStream().forEach((star1 -> star1.move()));
+            stars.parallelStream().unordered().forEach(star -> star.move());
 
             try {
                 fps = t;
                 fps = 1000 / fps;
                 long pause = 16 - t;
                 if (pause < 0) pause = 0;
-                if (pause > 16) pause =16;
+                if (pause > 16) pause = 16;
                 Thread.sleep(pause);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -108,9 +104,9 @@ public class DrawPanel extends JPanel implements Runnable {
         int height = getHeight();
 
         ratio = (double) height / (Universe.size * 2);
-        ratio = ratio + zoom/20;
+        ratio = ratio + zoom / 20;
 
-        int x, y, r;
+        //int x, y, r;
 
         totalFrame++;
 
@@ -119,22 +115,23 @@ public class DrawPanel extends JPanel implements Runnable {
             carentTotalMass = carentTotalMass + star.m;
         }
 
-        for (Star star : stars) {
+        stars.forEach(star -> {
+            int x, y, r;
             x = (int) (ratio * star.current.x);
             y = (int) (ratio * star.current.y);
             r = (int) (ratio * Math.sqrt(star.m) * 0.5);
             if (star.m < 5001) {
-                //g.drawOval((x + width / 2) - r / 2, (y + height / 2) - r / 2, r, r);
                 g.fillOval((x + width / 2) - r / 2, (y + height / 2) - r / 2, r, r);
             }
             g.drawOval((x + width / 2) - r / 2, (y + height / 2) - r / 2, r, r);
-        }
+        });
 
         g.drawString("Total stars:" + stars.size(), 1, 15);
-        g.drawString("Change mass: " + String.valueOf((int) (carentTotalMass -totalMass)), 1, 30);
+        g.drawString("Change mass: " + String.valueOf((int) (carentTotalMass - totalMass)), 1, 30);
         g.drawString("Total frame:" + String.valueOf((int) totalFrame), 1, 45);
         g.drawString("FPS: " + String.valueOf((int) fps), 1, 60);
         g.drawString("Ratio: " + String.valueOf(ratio), 1, 75);
+        g.drawString("Time: " + String.valueOf(t), 1, 90);
 
     }
 }
