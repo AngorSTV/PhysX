@@ -70,16 +70,13 @@ public class DrawPanel extends JPanel implements Runnable {
             newStars.clear();
 
             //расчёт сил гравитации на каждую звезду
-            stars.parallelStream().unordered().forEach(star -> star.run());
+            stars.parallelStream().unordered().forEach(Star::run);
 
             //Чистка масива от мёртвых объектов
-            Iterator<Star> iStar = stars.iterator();
-            while (iStar.hasNext()) {
-                if (!iStar.next().isAlive) iStar.remove();
-            }
+            stars.removeIf(star -> !star.isAlive);
 
             //перемещение звёзд
-            stars.parallelStream().unordered().forEach(star -> star.move());
+            stars.parallelStream().unordered().forEach(Star::move);
 
             try {
                 fps = t;
@@ -89,7 +86,7 @@ public class DrawPanel extends JPanel implements Runnable {
                 if (pause > 16) pause = 16;
                 Thread.sleep(pause);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             repaint();
             t = System.currentTimeMillis() - t1;

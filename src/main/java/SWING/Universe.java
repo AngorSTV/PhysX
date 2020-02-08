@@ -10,7 +10,7 @@ public class Universe {
     public static final int size =3000; // размер вселенной
 
     public static final int starsQuantity = 5000;
-    public static final int massBand = 1;
+    public static final int massBand = 100;
 
     //public static List<SWING.Star> stars = new LinkedList<>();
 
