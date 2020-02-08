@@ -20,7 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="PhysX" target="1.8" />
+      <module name="PhysX" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
