@@ -4,10 +4,11 @@ import common.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class Main extends JFrame {
+public final class Main extends JFrame {
 
 
     Main(String s) {

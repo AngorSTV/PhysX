@@ -4,16 +4,16 @@ package common;
  * Created by Angor on 22.11.2015.
  * можно использовать как класический вектор, так и как просто указатель координат
  */
-public class Vector2D {
+public final class Vector2D {
     public double x; // r - в полярной системе
     public double y; // t - угол
 
-    public Vector2D(){
+    public Vector2D() {
         this.x = 0;
         this.y = 0;
     }
 
-    public Vector2D(double x, double y){
+    public Vector2D(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -24,9 +24,9 @@ public class Vector2D {
     }
 
     // сложение с другим вектором
-    public void add(Vector2D other){
-        this.x = this.x + other.x;
-        this.y = this.y + other.y;
+    public void add(Vector2D other) {
+        this.x += other.x;
+        this.y += other.y;
     }
 
     // вычитание текущего вектора из другого
@@ -66,9 +66,9 @@ public class Vector2D {
     }
 
     // умножение вектора на число
-    public void mult (double factor){
-        this.x = this.x*factor;
-        this.y = this.y*factor;
+    public void mult (double factor) {
+        this.x *= factor;
+        this.y *= factor;
     }
 
     // конвертация радиального вектора в декартовский
